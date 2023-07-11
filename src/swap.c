@@ -21,5 +21,5 @@ void swapb(stack *stack_A)
 void swapswap(stack *stack_A, stack *stack_B)
 {
 	swapa(stack_A);
-	swapb(stack_A);
+	swapb(stack_B);
 }
