@@ -3,9 +3,16 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
+void mallocstack(stack *stack_A, int size)
+{
+    stack_A->array = (int *)malloc(size * sizeof(int));
+    stack_A->size = size;
+    stack_A->top = -1;
+}
+
 int loadstack(stack *stack_A, int argc, char const *argv[])
 {
-    stack_A->array = (int *)malloc(argc * sizeof(int));
+    mallocstack(stack_A, argc - 1);
 
     if (stack_A->array == NULL)
     {
@@ -13,13 +20,12 @@ int loadstack(stack *stack_A, int argc, char const *argv[])
         return -1; // Indicate failure with a non-zero value
     }
 
-    stack_A->size = argc;
-    stack_A->top = argc - 1;
+    stack_A->top = argc - 2;
 
     int i = 0;
-    while (i < argc)
+    while (i < argc - 1)
     {
-        stack_A->array[i] = atoi(argv[i + 1]);
+        stack_A->array[i] = ft_atoi(argv[i + 1]);
         i++;
     }
 
@@ -35,7 +41,12 @@ int main(int argc, char const *argv[])
     }
 
     stack stack_A;
-    if (loadstack(&stack_A, argc - 1, argv) == 0)
+    stack stack_B;
+
+    mallocstack(&stack_A, argc - 1);
+    mallocstack(&stack_B, argc - 1);
+
+    if (loadstack(&stack_A, argc, argv) == 0)
     {
         printf("Stack A: ");
         for (int i = 0; i < stack_A.size; i++)
@@ -44,9 +55,16 @@ int main(int argc, char const *argv[])
         }
         printf("\n");
 
-        rotateA(&stack_A);
+        printf("Stack B: ");
+        for (int i = 0; i < stack_B.size; i++)
+        {
+            printf("%d ", stack_B.array[i]);
+        }
+        printf("\n");
 
-        printf("Stack A after swap: ");
+        insertionSort(&stack_A,&stack_B);
+
+        printf("Stack A after sort: ");
         for (int i = 0; i < stack_A.size; i++)
         {
             printf("%d ", stack_A.array[i]);
@@ -59,6 +77,6 @@ int main(int argc, char const *argv[])
     }
 
     free(stack_A.array);
+    free(stack_B.array);
     return 0;
 }
-
