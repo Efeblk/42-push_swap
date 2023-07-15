@@ -14,7 +14,7 @@ void push(stack *stack_A, stack *stack_B)
     stack_A->array[stack_A->top] = stack_B->array[stack_B->top];
     stack_B->top -= 1;
     stack_B->size -= 1;
-} 
+}
 
 void pusha(stack *stack_A, stack *stack_B)
 {

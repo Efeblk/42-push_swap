@@ -37,4 +37,9 @@ int	ft_atoi(const char *str);
 int	ft_isdigit(int c);
 int	ft_isspace(int c);
 
+void radix(stack *stack_a, stack *stack_b);
+void push_to_a(stack *stack_a, stack *stack_b, int bit);
+void push_to_b(stack *stack_a, stack *stack_b, int bit);
+int getMaxBit(int *array, int size);
+int	check_sorted_rdx(stack *index);
 #endif

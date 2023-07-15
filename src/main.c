@@ -6,7 +6,7 @@
 void mallocstack(stack *stack_A, int size)
 {
     stack_A->array = (int *)malloc(size * sizeof(int));
-    stack_A->size = size;
+    stack_A->size = 0;
     stack_A->top = -1;
 }
 
@@ -19,7 +19,7 @@ int loadstack(stack *stack_A, int argc, char const *argv[])
         printf("Memory allocation failed.\n");
         return -1; // Indicate failure with a non-zero value
     }
-
+    stack_A->size = argc -1;
     stack_A->top = argc - 2;
 
     int i = 0;
@@ -62,12 +62,19 @@ int main(int argc, char const *argv[])
         }
         printf("\n");
 
-        insertionSort(&stack_A,&stack_B);
+        insertionSort(&stack_A, &stack_B);
 
         printf("Stack A after sort: ");
         for (int i = 0; i < stack_A.size; i++)
         {
             printf("%d ", stack_A.array[i]);
+        }
+        printf("\n");
+
+        printf("Stack B after sort: ");
+        for (int i = 0; i < stack_B.size; i++)
+        {
+            printf("%d ", stack_B.array[i]);
         }
         printf("\n");
     }
