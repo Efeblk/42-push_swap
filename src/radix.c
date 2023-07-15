@@ -8,14 +8,17 @@ void radix(stack *stack_a, stack *stack_b)
     int maxbit = getMaxBit(stack_a->array, stack_a->size);
     
     i = 0;
-
     while (i < maxbit)
     {
         push_to_b(stack_a, stack_b, i);
         i++;
         push_to_a(stack_a, stack_b, i);
-        i++;
     }
+    while (stack_b->size > 0)
+    {
+        pusha(stack_a, stack_b);
+    }
+    
 }
 
 void push_to_a(stack *stack_a, stack *stack_b, int bit)
@@ -26,14 +29,19 @@ void push_to_a(stack *stack_a, stack *stack_b, int bit)
     {        
         if ((stack_b->array[stack_b->top] & (1 << bit)) == 0)
         {
-            rotateB(stack_a);
+            rotateB(stack_b);
+            printf("top after %i \n", stack_b->array[stack_b->top]);
         }
         else
         {
+            printf("pushing: %i \n", stack_b->array[stack_b->top]);
             pusha(stack_a, stack_b);
+            printf("top? %i \n", stack_b->array[stack_b->top]);
         }   
         size--;
     }
+    printf("push to a done \n");
+    printf("\n");
 }
 
 void push_to_b(stack *stack_a, stack *stack_b, int bit)
@@ -48,7 +56,7 @@ void push_to_b(stack *stack_a, stack *stack_b, int bit)
         }
         else
         {
-            rotateA(stack_b);
+            rotateA(stack_a);
         } 
         size--;
     }
@@ -77,7 +85,7 @@ int	check_sorted_rdx(stack *index)
 	int	i;
 
 	i = 0;
-	while (i < index->size)
+	while (i < index->size - 1)
 	{
 		if (index->array[i] > index->array[i + 1])
 			++i;
