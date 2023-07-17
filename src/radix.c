@@ -51,13 +51,9 @@ void push_to_b(stack *stack_a, stack *stack_b, int bit)
     while (size > 0)
     {
         if((stack_a->array[stack_a->top] & (1 << bit)) == 0)
-        {
             pushb(stack_b, stack_a);
-        }
         else
-        {
             rotateA(stack_a);
-        } 
         size--;
     }
 }
@@ -67,9 +63,8 @@ int getMaxBit(int *array, int size)
     int max_value = INT_MIN;
 
     for (int i = 0; i < size; i++) {
-        if (array[i] > max_value) {
+        if (array[i] > max_value)
             max_value = array[i];
-        }
     }
 
     int max_bit = 0;
