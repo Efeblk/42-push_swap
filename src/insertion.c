@@ -11,10 +11,8 @@ void insertionSort(stack *stack_A, stack *stack_B)
         size3(stack_A);
     else if(size == 4)
         size4(stack_A, stack_B);
-	else if (size >= 5)
-	{
+	else if (size > 5)
 		radix(stack_A,stack_B);
-	}
 }
 
 void size2(stack *stack_A)
